@@ -1,24 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Product from './pages/Product';
+import Pricing from './pages/Pricing';
+import Homepage from './pages/Homepage';
+import AppLayout from './pages/AppLayout';
+import PageNotFound from './pages/PageNotFound';
+import Login from './pages/Login';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <BrowserRouter>
+      <Routes>
+        <Route
+          index
+          element={<Homepage />}
+        />
+        <Route
+          path='product'
+          element={<Product />}
+        />
+        <Route
+          path='pricing'
+          element={<Pricing />}
+        />
+        <Route
+          path='/login'
+          element={<Login />}
+        />
+        <Route
+          path='app'
+          element={<AppLayout />}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Route
+            index
+            element={<p>list of cities</p>}
+          />
+
+          <Route
+            path='cities'
+            element={<p>list of cities</p>}
+          />
+
+          <Route
+            path='countries'
+            element={<p>list of countries</p>}
+          />
+
+          <Route
+            path='form'
+            element={<p>form</p>}
+          />
+        </Route>
+        <Route
+          path='*'
+          element={<PageNotFound />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
